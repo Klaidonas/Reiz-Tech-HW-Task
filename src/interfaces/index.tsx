@@ -1,9 +1,12 @@
 export type ICountryData = {
+  toLowerCase(): ICountryData;
   name: string,
   region: string,
   area: number,
   independence: boolean,
-  loading?: boolean,
-  error?: string
 };
 
+export type IDATA = {
+  data: ICountryData[],
+  error: string,
+}
