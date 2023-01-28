@@ -14,13 +14,14 @@ export const CountriesFetch = async(url:string) => {
 
 export const Sort = async(filteredData:ICountryData[], order:string) => {
   var sorted:ICountryData[]=[];
+  var newOrder:string = order;
   if(order==="ASC") {
-    console.log("order = ASC; filtered Data:");console.log(filteredData);
-    
+    newOrder = "DSC";    
     sorted = [...filteredData].sort((a,b)=>
     a.name > b.name ? 1 : -1);
     }
     else if(order==="DSC") {
+      newOrder = "ASC";
       sorted = [...filteredData].sort((a,b)=>
       a.name < b.name ? 1 : -1);
     }
@@ -33,5 +34,27 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
     console.log("; sorted: "); console.log(sorted);
     console.log(Error);
     
-  return {sorted};
+  return {sorted, newOrder};
+}
+
+
+
+export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
+  var newFilteredData:ICountryData[]=[];
+  if(filter===0) {
+    var smallerThanLt = filteredData.filter((country: { area: number; }) => {
+      return country.area < 65300.0;
+    })
+    newFilteredData = smallerThanLt;
+  }
+  else if(filter===1) {
+    var inOceania = filteredData.filter((country: { region: string; }) => {
+      return country.region === "Oceania";
+    })
+    newFilteredData=inOceania;
+  }
+  else if(filter===2) {
+    newFilteredData=dataCopy;
+    }
+    return {newFilteredData}
 }
