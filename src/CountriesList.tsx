@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 //import useFetch from './useFetch';
 import Country from './Country';
-import { ICountryData, IDATA } from './interfaces';
-import { Blabla } from './test';
+import { ICountryData, IDATA} from './interfaces';
+import { CountriesFetch, Sort } from './test';
 
 
 const CountryList:React.FC = () => {
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   useEffect(() => {
-    test();
-    console.log("order: " + order);
+    fetch();
     console.log('usefetch suveike');
   }, [])
   
@@ -19,14 +18,14 @@ const CountryList:React.FC = () => {
   const [order, setOrder] = useState("ASC");
 
 
-  const test = async() => {
-  const {data, error, sorted}:IDATA = await Blabla("https://restcountries.com/v2/all?fields=name,region,area", order);
-  setDataCopy(sorted);
+  const fetch = async() => {
+  const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
   setFilteredData(data);
+  setDataCopy(data);
   console.log("data:");
   console.log(data);
-  console.log("sorted:");
-  console.log(sorted);
+  console.log("filteredData:");
+  console.log(filteredData);
   
   if(error) console.log("error: " + error);
   //console.log("order: " + order);
@@ -35,35 +34,40 @@ const CountryList:React.FC = () => {
 
   /*    SORTINGAS     */
   const sorting = async ()=> {
-    const { data, error, sorted }:IDATA = await Blabla("https://restcountries.com/v2/all?fields=name,region,area", order);
+    console.log("filteredData:");
+    console.log(filteredData);
+    console.log(order);
+    
+    const { sorted }:any = await Sort(filteredData, order);
+    console.log("po awaito sorted:"); console.log(sorted);
+
+    console.log("filteredData po sorto:");
+    console.log(filteredData);
+    
     if(order ==="ASC") {
       setFilteredData(sorted);
       setOrder("DSC");
       console.log("order ===ASC");
-      console.log(sorted);
     }
     else if(order ==="DSC") {
       setFilteredData(sorted);
       setOrder("ASC");
       console.log("order ===DSC")
-      console.log(sorted);
     }
-    console.log(data);
-    console.log(order);
-    
+    console.log(sorted);    
   }
     /*    SORTINGAS     */
 
     /*    FILTRAVIMAS     */
   const handleFilter = (filter: number) => {
     if(filter===0) {
-      var smallerThanLt = dataCopy.filter((country: { area: number; }) => {
+      var smallerThanLt = filteredData.filter((country: { area: number; }) => {
         return country.area < 65300.0;
       })
       setFilteredData(smallerThanLt);
     }
     else if(filter===1) {
-      var inOceania = dataCopy.filter((country: { region: string; }) => {
+      var inOceania = filteredData.filter((country: { region: string; }) => {
         return country.region === "Oceania";
       })
       setFilteredData(inOceania);

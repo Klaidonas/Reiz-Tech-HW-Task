@@ -9,5 +9,4 @@ export type ICountryData = {
 export type IDATA = {
   data: ICountryData[],
   error: string,
-  sorted?: any
 }
