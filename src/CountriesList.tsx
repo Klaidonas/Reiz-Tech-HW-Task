@@ -1,28 +1,60 @@
 import React, { useEffect, useState } from 'react';
 //import useFetch from './useFetch';
 import Country from './Country';
-import { ICountryData } from './interfaces';
+import { ICountryData, IDATA } from './interfaces';
 import { Blabla } from './test';
 
+
 const CountryList:React.FC = () => {
- // const data:ICountryData[] = []
- // const {data, loading, error} = useFetch("https://restcountries.com/v2/all?fields=name,region,area");
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   useEffect(() => {
     test();
+    console.log("order: " + order);
+    console.log('usefetch suveike');
   }, [])
   
+
+
+  const [order, setOrder] = useState("ASC");
+
+
   const test = async() => {
-  const {data, error}:any = await Blabla("https://restcountries.com/v2/all?fields=name,region,area");
-  setDataCopy(data);
+  const {data, error, sorted}:IDATA = await Blabla("https://restcountries.com/v2/all?fields=name,region,area", order);
+  setDataCopy(sorted);
   setFilteredData(data);
+  console.log("data:");
+  console.log(data);
+  console.log("sorted:");
+  console.log(sorted);
+  
   if(error) console.log("error: " + error);
-  console.log("response: " + JSON.stringify(data));
+  //console.log("order: " + order);
   }
+ 
 
-   
+  /*    SORTINGAS     */
+  const sorting = async ()=> {
+    const { data, error, sorted }:IDATA = await Blabla("https://restcountries.com/v2/all?fields=name,region,area", order);
+    if(order ==="ASC") {
+      setFilteredData(sorted);
+      setOrder("DSC");
+      console.log("order ===ASC");
+      console.log(sorted);
+    }
+    else if(order ==="DSC") {
+      setFilteredData(sorted);
+      setOrder("ASC");
+      console.log("order ===DSC")
+      console.log(sorted);
+    }
+    console.log(data);
+    console.log(order);
+    
+  }
+    /*    SORTINGAS     */
 
+    /*    FILTRAVIMAS     */
   const handleFilter = (filter: number) => {
     if(filter===0) {
       var smallerThanLt = dataCopy.filter((country: { area: number; }) => {
@@ -40,14 +72,12 @@ const CountryList:React.FC = () => {
       setFilteredData(dataCopy);
       }
   }
-  
+      /*    FILTRAVIMAS     */
 
-  //  console.log("old List: " + JSON.stringify(data), data?.length);
-  //  console.log("filtered Data: " + JSON.stringify(filteredData), filteredData?.length);
-  
   return (
     <div className="content">
-      <h1>{filteredData ? "zjbs datax" : "pzdc data"}</h1>
+      <h1>{filteredData ? "zjbxs datax" : "pzdc data"}</h1>
+      <button onClick={() => sorting()}>sort</button>
       <button onClick={() => handleFilter(0)}>Smaller Than Lithuania</button>
       <button onClick={() => handleFilter(1)}>In Oceania</button>
       <button onClick={() => handleFilter(2)}>All countries</button>
@@ -63,7 +93,3 @@ const CountryList:React.FC = () => {
 };
 
 export default CountryList;
-
-function async(arg0: string): { data: any; loading: any; error: any; } {
-  throw new Error('Function not implemented.');
-}
