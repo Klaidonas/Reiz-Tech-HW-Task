@@ -7,12 +7,10 @@ button {
   font-size: 14px;
   height: 25px;
 }
-
 .navigation {
   display: flex;
   justify-content: space-between;
 }
-
 .navigation .filters button{
   margin: 0 10px;
 }
