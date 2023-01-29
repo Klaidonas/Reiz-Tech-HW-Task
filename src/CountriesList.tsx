@@ -58,7 +58,7 @@ const CountryList:React.FC = () => {
       </div>
       <Country countries={currentCountries} country={{//  }
         toLowerCase: function (): ICountryData {//        }      Did not understand how to define
-          throw new Error('Function not implemented.');// }      country, the error said that "country"
+          throw new Error('Function not implemented.');// }      "country", the error said that "country"
         },//                                              } ---- had missing type and
         name: '',//                                       }      my previous types did not work, so 
         region: '',//                                     }      I just went with recommended quick fix
