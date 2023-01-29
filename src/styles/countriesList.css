@@ -1,0 +1,39 @@
+.countries-list {
+  margin:0;
+  padding: 0;
+}
+.country-element {
+ display: flex;
+ margin: 20px 0;
+ background-color: #ccffcc;
+ list-style: none;
+}
+.countries-list h4{
+  margin: 10px 0;
+  font-size: 18px;
+}
+.li-container {
+  width: 100%;
+  display: flex;
+}
+.li-column {
+  margin: 0 50px;
+  width: 300px;
+}
+.data {
+  font-weight: bold;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+}
+
+@media (max-width: 1240px) {
+  .li-container {
+    justify-content: space-around;
+  }
+  .li-column {
+    width:33%;
+  }
+}

@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
-//import useFetch from './useFetch';
-import Country from './Country';
-import { ICountryData, IDATA} from './interfaces';
-import { CountriesFetch, Filter, Sort } from './test';
-
+import Country from './components/Country';
+import { ICountryData, IDATA, ISort} from './interfaces';
+import { CountriesFetch, Filter, Sort } from './functions';
+import Pagination from './components/pagination';
 
 const CountryList:React.FC = () => {
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
+  const [order, setOrder] = useState("ASC");
+
   useEffect(() => {
     fetch();
-    console.log('usefetch suveike');
   }, [])
   
-
-
-  
-
-
+   /*    FETCHING     */
   const fetch = async() => {
   const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
   setFilteredData(data);
@@ -25,38 +21,52 @@ const CountryList:React.FC = () => {
   if(error) console.log("error: " + error);
   }
 
-  /*    SORTINGAS     */
-  const [order, setOrder] = useState("ASC");
-  console.log(order);
+  /*    SORTING     */
   const sorting = async ()=> {
-    const { sorted, newOrder }:any = await Sort(filteredData, order);
+    const { sorted, newOrder }:ISort = await Sort(filteredData, order);
       setFilteredData(sorted);
       setOrder(newOrder);
   }
-    /*    SORTINGAS     */
 
-    /*    FILTRAVIMAS     */
-  const handleFilter = (filter:any) => {
-    const {newFilteredData} = Filter(filter=filter, filteredData, dataCopy);
+  /*    FILTER     */
+  const handleFilter = (filter:number) => {
+    const {newFilteredData} = Filter(filter, filteredData, dataCopy);
     setFilteredData(newFilteredData)
-}
-      /*    FILTRAVIMAS     */
+  }
+
+/*    PAGINATION   */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [elementsPerPage] = useState(8);
+  const indexOfLastCountry = currentPage * elementsPerPage;
+  const indexOfFirstCountry = indexOfLastCountry - elementsPerPage;
+  const currentCountries = filteredData.slice(indexOfFirstCountry, indexOfLastCountry);
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  }
+  
   return (
     <div className="content">
-      <h1>{filteredData ? "zjbxs datax" : "pzdc data"}</h1>
-      <button onClick={() => sorting()}>sort</button>
-      <button onClick={() => handleFilter(0)}>Smaller Than Lithuania</button>
-      <button onClick={() => handleFilter(1)}>In Oceania</button>
-      <button onClick={() => handleFilter(2)}>All countries</button>
-      <ul>
-        {filteredData?.map((country: ICountryData) => {
-          return(
-            <Country key={Math.random()} country={country} />
-          )
-        })}
-      </ul>
+      <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
+      <div className="navigation">
+        <div className="filters">
+          <button onClick={() => handleFilter(0)}>Smaller Than Lithuania</button>
+          <button onClick={() => handleFilter(1)}>In Oceania</button>
+          <button onClick={() => handleFilter(2)}>All countries</button>
+        </div>
+        <div className="sort-btn"><button onClick={() => sorting()}>sort</button></div>
+      </div>
+      <Country countries={currentCountries} country={{//  }
+        toLowerCase: function (): ICountryData {//        }      Did not understand how to define
+          throw new Error('Function not implemented.');// }      country, the error said that "country"
+        },//                                              } ---- had missing type and
+        name: '',//                                       }      my previous types did not work, so 
+        region: '',//                                     }      I just went with recommended quick fix
+        area: 0,//                                        }
+        independence: false//                             }
+      }} />
+      <Pagination elementsPerPage={elementsPerPage} totalPosts={filteredData.length} paginate={paginate}/>
     </div>
   );
 };
-
 export default CountryList;

@@ -1,0 +1,18 @@
+button {
+  background-color: #90ff90;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  height: 25px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation .filters button{
+  margin: 0 10px;
+}

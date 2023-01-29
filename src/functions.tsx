@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ICountryData } from './interfaces';
 
+/*    FETCHING     */
 export const CountriesFetch = async(url:string) => {
   var error='';
   var data:ICountryData[]=[];
@@ -12,6 +13,7 @@ export const CountriesFetch = async(url:string) => {
   return {data, error };
 }
 
+ /*    SORTING     */
 export const Sort = async(filteredData:ICountryData[], order:string) => {
   var sorted:ICountryData[]=[];
   var newOrder:string = order;
@@ -25,20 +27,10 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
       sorted = [...filteredData].sort((a,b)=>
       a.name < b.name ? 1 : -1);
     }
-    else{
-      console.log("wtf");
-      
-       sorted = [...filteredData]
-    }
-
-    console.log("; sorted: "); console.log(sorted);
-    console.log(Error);
-    
   return {sorted, newOrder};
 }
 
-
-
+/*    FILTER     */
 export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
   var newFilteredData:ICountryData[]=[];
   if(filter===0) {

@@ -1,10 +1,14 @@
-import CountrieList from './CountriesList';
-import './style.css';
+import CountriesList from './CountriesList';
+import './styles/style.css';
+import './styles/navigation.css';
+import './styles/countriesList.css';
+import './styles/pagination.css';
+
 
 function App() {
   return (
     <div className="App">
-      <CountrieList />
+      <CountriesList />
     </div>
   );
 }
