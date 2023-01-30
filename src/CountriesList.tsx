@@ -15,7 +15,7 @@ const CountryList:React.FC = () => {
   
    /*    FETCHING     */
   const fetch = async() => {
-  const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
+  const {data, error }:IDATA = await CountriesFetch("https://test-api-imzm.onrender.com/posts");
   setFilteredData(data);
   setDataCopy(data);
   if(error) console.log("error: " + error);
