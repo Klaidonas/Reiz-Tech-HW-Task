@@ -19,9 +19,9 @@ const Pagination = ({ elementsPerPage, totalPosts, paginate }: IPagination) => {
       <ul>
         {pageNumbers.map(nr => (
           <li key={nr} className={"nr" + String(nr)}>
-            <a onClick={() => handlePaginate(nr)} href= '!#' className={(active===nr ? "active" : 'not-active')}>
+            <button onClick={() => handlePaginate(nr)} className={(active===nr ? "active" : 'not-active')}>
               {nr}
-            </a>
+            </button>
           </li>
         ))}
       </ul>

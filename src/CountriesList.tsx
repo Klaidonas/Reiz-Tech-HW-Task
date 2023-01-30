@@ -8,6 +8,7 @@ const CountryList:React.FC = () => {
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   const [order, setOrder] = useState("ASC");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     fetch();
@@ -18,7 +19,10 @@ const CountryList:React.FC = () => {
   const {data, error }:IDATA = await CountriesFetch("https://test-api-imzm.onrender.com/posts");
   setFilteredData(data);
   setDataCopy(data);
-  if(error) console.log("error: " + error);
+  if(error) {
+    console.log("error: " + error);
+    setErrorMsg(error);
+  }
   }
 
   /*    SORTING     */
@@ -47,7 +51,7 @@ const CountryList:React.FC = () => {
   
   return (
     <div className="content">
-      <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
+      <h1>{errorMsg ? errorMsg + " ; display data from api task(ReactJS)" : "Displaying data from api task(ReactJS)"}</h1>
       <div className="navigation">
         <div className="filters">
           <button onClick={() => handleFilter(0)}>Smaller Than Lithuania</button>
