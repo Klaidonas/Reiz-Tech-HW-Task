@@ -22,7 +22,7 @@ export type ISort = {
 }
 
 export type IPagination = {
-  elementsPerPage: number,
-  totalPosts: number,
+  countriesPerPage: number,
+  totalCountries: number,
   paginate:any
 }

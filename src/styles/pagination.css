@@ -15,10 +15,9 @@
   color: #000;
 }
 
-.pagination button {
-  background-color: transparent;
-  border-radius: 0;
-  cursor: pointer;
+.pagination .active {
+  font-weight: bold;
+  border-bottom: 1px solid #000;
 }
 
 @media (max-width: 1235px) {

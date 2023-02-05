@@ -50,3 +50,16 @@ export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICo
     }
     return {newFilteredData}
 }
+
+export const handleActiveFilterUI = (filter:number) => {
+  const test:any = document.getElementById("btn" + filter);
+  console.log(test);
+  if(filter!==2) {
+    test.classList.add('active');
+  }
+  else {
+    document.getElementById("btn0")?.classList.remove('active');
+    document.getElementById("btn1")?.classList.remove('active');
+    document.getElementById("btn2")?.classList.remove('active');
+  }
+}

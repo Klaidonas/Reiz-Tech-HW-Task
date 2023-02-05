@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IPagination } from '../interfaces';
 
-const Pagination = ({ elementsPerPage, totalPosts, paginate }: IPagination) => {
+const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination) => {
   const [active, setActive] = useState<number>(1);
   
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalPosts / elementsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalCountries / countriesPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -19,9 +19,9 @@ const Pagination = ({ elementsPerPage, totalPosts, paginate }: IPagination) => {
       <ul>
         {pageNumbers.map(nr => (
           <li key={nr} className={"nr" + String(nr)}>
-            <button onClick={() => handlePaginate(nr)} className={(active===nr ? "active" : 'not-active')}>
+            <a onClick={() => handlePaginate(nr)} href='#' className={(active===nr ? "active" : 'not-active')}>
               {nr}
-            </button>
+            </a>
           </li>
         ))}
       </ul>
