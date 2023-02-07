@@ -21,12 +21,12 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
     newOrder = "DSC";    
     sorted = [...filteredData].sort((a,b)=>
     a.name > b.name ? 1 : -1);
-    }
-    else if(order==="DSC") {
-      newOrder = "ASC";
-      sorted = [...filteredData].sort((a,b)=>
-      a.name < b.name ? 1 : -1);
-    }
+  }
+  else if(order==="DSC") {
+    newOrder = "ASC";
+    sorted = [...filteredData].sort((a,b)=>
+    a.name < b.name ? 1 : -1);
+  }
   return {sorted, newOrder};
 }
 
@@ -48,18 +48,18 @@ export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICo
   else if(filter===2) {
     newFilteredData=dataCopy;
     }
-    return {newFilteredData}
+  return {newFilteredData}
 }
 
+/*    ACTIVE FILTER    */
 export const handleActiveFilterUI = (filter:number) => {
-  const test:any = document.getElementById("btn" + filter);
-  console.log(test);
+  const button:HTMLElement | null = document.getElementById("btn" + filter);
+  console.log(button);
   if(filter!==2) {
-    test.classList.add('active');
+    button?.classList.add('active');
   }
   else {
     document.getElementById("btn0")?.classList.remove('active');
     document.getElementById("btn1")?.classList.remove('active');
-    document.getElementById("btn2")?.classList.remove('active');
   }
 }

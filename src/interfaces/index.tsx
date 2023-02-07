@@ -1,5 +1,4 @@
 export type ICountryData = {
-  toLowerCase(): ICountryData;
   name: string,
   region: string,
   area: number,
@@ -24,5 +23,5 @@ export type ISort = {
 export type IPagination = {
   countriesPerPage: number,
   totalCountries: number,
-  paginate:any
+  paginate:Function
 }

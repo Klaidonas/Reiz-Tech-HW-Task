@@ -4,7 +4,7 @@ import { ICountryData, IDATA, ISort} from './interfaces';
 import { CountriesFetch, Filter, handleActiveFilterUI, Sort } from './functions';
 import Pagination from './components/pagination';
 
-const CountryList:React.FC = () => {
+const CountryList = () => {
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   const [order, setOrder] = useState("ASC");
@@ -15,17 +15,17 @@ const CountryList:React.FC = () => {
   
    /*    FETCHING     */
   const fetch = async() => {
-  const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
-  setFilteredData(data);
-  setDataCopy(data);
-  if(error) console.log("error: " + error);
+    const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
+    setFilteredData(data);
+    setDataCopy(data);
+    if(error) console.log("error: " + error);
   }
 
   /*    SORTING     */
   const sorting = async ()=> {
     const { sorted, newOrder }:ISort = await Sort(filteredData, order);
-      setFilteredData(sorted);
-      setOrder(newOrder);
+    setFilteredData(sorted);
+    setOrder(newOrder);
   }
 
   /*    FILTER     */
@@ -38,17 +38,14 @@ const CountryList:React.FC = () => {
 /*    PAGINATION   */
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage:number = 8;
-  const indexOfLastCountry = currentPage * countriesPerPage;
-  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountries = filteredData.slice(indexOfFirstCountry, indexOfLastCountry);
+  const indexOfLastCountry:number = currentPage * countriesPerPage;
+  const indexOfFirstCountry:number = indexOfLastCountry - countriesPerPage;
+  const currentCountries:ICountryData[] = filteredData.slice(indexOfFirstCountry, indexOfLastCountry);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    console.log(paginate);
   }
-
-  
-  
-
 
   return (
     <div className="content">
@@ -59,17 +56,11 @@ const CountryList:React.FC = () => {
           <button id = "btn1" onClick={() => handleFilter(1)}>In Oceania</button>
           <button id = "btn2" onClick={() => handleFilter(2)}>All countries</button>
         </div>
-        <div className="sort-btn"><button onClick={() => sorting()}>sort</button></div>
+        <div className="sort-btn">
+          <button onClick={() => sorting()}>sort</button>
+        </div>
       </div>
-      <Country countries={currentCountries} country={{//  }
-        toLowerCase: function (): ICountryData {//        }      Did not understand how to define
-          throw new Error('Function not implemented.');// }      "country", the error said that "country"
-        },//                                              } ---- had missing type and
-        name: '',//                                       }      my previous types did not work, so 
-        region: '',//                                     }      I just went with recommended quick fix
-        area: 0,//                                        }
-        independence: false//                             }
-      }} />
+      <Country countries={currentCountries}/>
       <Pagination countriesPerPage={countriesPerPage} totalCountries={filteredData.length} paginate={paginate}/>
     </div>
   );

@@ -1,11 +1,18 @@
 button {
-  background-color: #90ff90;
   border: none;
   border-radius: 5px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
   height: 25px;
+}
+
+.filters button {
+  background-color: #90ff90;
+  border-radius: 15px;
+}
+.sort-btn button {
+  background-color: #90ff90;
 }
 .navigation {
   display: flex;

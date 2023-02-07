@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { IPagination } from '../interfaces';
 
+  
+
 const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination) => {
   const [active, setActive] = useState<number>(1);
   
@@ -9,7 +11,7 @@ const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination)
     pageNumbers.push(i);
   }
 
-  const handlePaginate = (nr:number) => {
+  const handlePaginate = (nr:number): void => {
     paginate(nr);
     setActive(nr);
   }
