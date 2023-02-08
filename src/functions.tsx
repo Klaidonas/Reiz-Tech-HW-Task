@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { log } from 'console';
 import { ICountryData } from './interfaces';
 
 /*    FETCHING     */
@@ -32,6 +33,8 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
 
 /*    FILTER     */
 export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
+  console.log(filter);
+  
   var newFilteredData:ICountryData[]=[];
   if(filter===0) {
     var smallerThanLt = filteredData.filter((country: { area: number; }) => {
