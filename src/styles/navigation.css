@@ -1,5 +1,4 @@
 button {
-  background-color: #90ff90;
   border: none;
   border-radius: 5px;
   text-transform: uppercase;
@@ -7,10 +6,22 @@ button {
   font-size: 14px;
   height: 25px;
 }
+
+.filters button {
+  background-color: #90ff90;
+  border-radius: 15px;
+}
+.sort-btn button {
+  background-color: #90ff90;
+}
 .navigation {
   display: flex;
   justify-content: space-between;
 }
 .navigation .filters button{
   margin: 0 10px;
+}
+
+.filters .active {
+  border: 1px solid #000;
 }

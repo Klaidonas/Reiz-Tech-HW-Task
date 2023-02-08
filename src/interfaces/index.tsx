@@ -1,5 +1,4 @@
 export type ICountryData = {
-  toLowerCase(): ICountryData;
   name: string,
   region: string,
   area: number,
@@ -22,7 +21,7 @@ export type ISort = {
 }
 
 export type IPagination = {
-  elementsPerPage: number,
-  totalPosts: number,
-  paginate:any
+  countriesPerPage: number,
+  totalCountries: number,
+  paginate:Function
 }
