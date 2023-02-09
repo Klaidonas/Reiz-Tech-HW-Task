@@ -13,7 +13,8 @@ function App() {
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [order, setOrder] = useState("DSC");
 
-  const fromChild = (countryList:ICountryData[]) => {
+  /*  BRINGING DATA(COUNTRIES) FROM CHILD(CountryList)  */
+  const countriesFetch = (countryList:ICountryData[]) => {
     setDataCopy(countryList);
     setFilteredData(countryList);
   }
@@ -37,7 +38,7 @@ function App() {
     <div className="content">
       <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
       <Nav handleFilter = {handleFilter} sorting = {sorting}/>
-      <CountryList toParent={fromChild} newFilteredData={filteredData}/>
+      <CountryList countriesFetch={countriesFetch} newFilteredData={filteredData}/>
     </div>
   );
 }

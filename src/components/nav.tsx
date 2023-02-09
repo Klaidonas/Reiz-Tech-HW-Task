@@ -1,4 +1,3 @@
-import React from 'react';
 type Props = {
   handleFilter: (filter:string) => void,
   sorting: () => void
@@ -17,5 +16,4 @@ const Nav = ({handleFilter, sorting}:Props) => {
     </div>
   );
 };
-
 export default Nav;

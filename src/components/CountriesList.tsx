@@ -1,27 +1,26 @@
 import  { useEffect, useState } from 'react';
 import Country from './Country';
-import { ICountryData, IDATA, IPagination, ISort} from '../interfaces';
-import { CountriesFetch, Filter, handleActiveFilterUI, Sort } from '../functions';
+import { ICountryData, IDATA, ISort} from '../interfaces';
+import { CountriesFetch } from '../functions';
 import Pagination from './pagination';
 
-type props = {
-  toParent: (data:ICountryData[]) => void,
+type Props = {
+  countriesFetch: (data:ICountryData[]) => void,
   newFilteredData:ICountryData[]
 }
-const CountryList = ({toParent, newFilteredData}:props) => {
-  const [dataFetched, setDataFetched] = useState<number>(0);
-  console.log(newFilteredData);
+const CountryList = ({countriesFetch, newFilteredData}:Props) => {
+  const [isDataFetched, setIsDataFetched] = useState<boolean>(false);
 
   useEffect(() => {
     fetch();
-  }, [dataFetched])
+  }, [isDataFetched])
 
   /*    FETCHING     */
   const fetch = async() => {
-    const {data, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
-    toParent(data);
+    const {countries, error }:IDATA = await CountriesFetch("https://restcountries.com/v2/all?fields=name,region,area");
+    countriesFetch(countries);
     if(error) console.log("error: " + error);
-    setDataFetched(1);
+    setIsDataFetched(true);
   }
 
   /*    PAGINATION   */
@@ -31,19 +30,31 @@ const CountryList = ({toParent, newFilteredData}:props) => {
   const indexOfFirstCountry:number = indexOfLastCountry - countriesPerPage;
   const currentCountries:ICountryData[] = newFilteredData?.slice(indexOfFirstCountry, indexOfLastCountry);
 
+  /*    changing current page(pageNumber brought from Pagination)   */
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     console.log(paginate);
   }
 
+  const [noCurrentCountries, setNoCurrentCountries] = useState<boolean>(false);
+  /*changing current page to "1" if there were no countries in current page*/
+  const AreThereCurrentCountries = (noCurrentCountries:boolean) => {
+    setNoCurrentCountries(noCurrentCountries)
+    console.log("AreThereCurrentCountries")
+    setCurrentPage(1);
+  }
+  console.log(noCurrentCountries)
+
   return (
     <div>
       { newFilteredData!==undefined && 
-      <Country countries={currentCountries}/>
+      <Country countries={currentCountries} 
+      noCurrentCountries = {AreThereCurrentCountries} isDataFetched = {isDataFetched}/>
       }
       { newFilteredData!==undefined && 
       <Pagination countriesPerPage={countriesPerPage} 
-        totalCountries={newFilteredData.length} paginate={paginate}/>}
+        totalCountries={newFilteredData.length} paginate={paginate}
+        noCurrentCountries = {noCurrentCountries}/>}
     </div>
   );
 };

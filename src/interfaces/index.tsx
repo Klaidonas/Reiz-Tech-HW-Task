@@ -11,7 +11,7 @@ export type Props = {
 }
 
 export type IDATA = {
-  data: ICountryData[],
+  countries: ICountryData[],
   error: string,
 }
 
@@ -20,8 +20,3 @@ export type ISort = {
   newOrder: string
 }
 
-export type IPagination = {
-  countriesPerPage: number,
-  totalCountries: number,
-  paginate: (pageNumber: number) => void
-}

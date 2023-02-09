@@ -4,13 +4,13 @@ import { ICountryData } from './interfaces';
 /*    FETCHING     */
 export const CountriesFetch = async(url:string) => {
   let error='';
-  let data:ICountryData[]=[];
+  let countries:ICountryData[]=[];
   await axios
   .get(url)
-  .then((response) => {data = response.data;})
+  .then((response) => {countries = response.data;})
   .catch((err) => {error=err})
   .finally(() => {})
-  return {data, error };
+  return {countries, error };
 }
 
  /*    SORTING     */

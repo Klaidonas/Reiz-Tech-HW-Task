@@ -1,12 +1,21 @@
+import { useEffect } from 'react';
 import { ICountryData } from '../interfaces';
 
 type Props = {
-  countries: ICountryData[]
+  countries: ICountryData[], 
+  noCurrentCountries:(noCurrentCountries:boolean) => void, 
+  isDataFetched:boolean
 }
-
-const Country = ({countries}:Props) => {
+const Country = ({countries, noCurrentCountries, isDataFetched}:Props) => {
   console.log("current countries:")
   console.log(countries)
+
+    /*    checking if there are any data(countries) in current page   */
+  useEffect(() => {
+    console.log(countries.length);
+    if(countries.length===0 && (isDataFetched)) noCurrentCountries(true)
+  }, [countries])
+
   return (
     <ul className='countries-list'>
       {countries.map((country: ICountryData) => (
