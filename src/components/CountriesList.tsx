@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Country from './components/Country';
-import { ICountryData, IDATA, ISort} from './interfaces';
-import { CountriesFetch, Filter, handleActiveFilterUI, Sort } from './functions';
-import Pagination from './components/pagination';
+import  { useEffect, useState } from 'react';
+import Country from './Country';
+import { ICountryData, IDATA, IPagination, ISort} from '../interfaces';
+import { CountriesFetch, Filter, handleActiveFilterUI, Sort } from '../functions';
+import Pagination from './pagination';
 
 type props = {
-  toParent:any,
-  newFilteredData:any
+  toParent: (data:ICountryData[]) => void,
+  newFilteredData:ICountryData[]
 }
 const CountryList = ({toParent, newFilteredData}:props) => {
   const [dataFetched, setDataFetched] = useState<number>(0);
@@ -29,7 +29,7 @@ const CountryList = ({toParent, newFilteredData}:props) => {
   const countriesPerPage:number = 8;
   const indexOfLastCountry:number = currentPage * countriesPerPage;
   const indexOfFirstCountry:number = indexOfLastCountry - countriesPerPage;
-  const currentCountries:any = newFilteredData?.slice(indexOfFirstCountry, indexOfLastCountry);
+  const currentCountries:ICountryData[] = newFilteredData?.slice(indexOfFirstCountry, indexOfLastCountry);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -39,7 +39,8 @@ const CountryList = ({toParent, newFilteredData}:props) => {
   return (
     <div>
       { newFilteredData!==undefined && 
-      <Country countries={currentCountries}/>}
+      <Country countries={currentCountries}/>
+      }
       { newFilteredData!==undefined && 
       <Pagination countriesPerPage={countriesPerPage} 
         totalCountries={newFilteredData.length} paginate={paginate}/>}

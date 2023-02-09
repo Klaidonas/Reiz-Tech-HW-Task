@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { log } from 'console';
 import { ICountryData } from './interfaces';
 
 /*    FETCHING     */
 export const CountriesFetch = async(url:string) => {
-  var error='';
-  var data:ICountryData[]=[];
+  let error='';
+  let data:ICountryData[]=[];
   await axios
   .get(url)
   .then((response) => {data = response.data;})
@@ -16,8 +15,8 @@ export const CountriesFetch = async(url:string) => {
 
  /*    SORTING     */
 export const Sort = async(filteredData:ICountryData[], order:string) => {
-  var sorted:ICountryData[]=[];
-  var newOrder:string = order;
+  let sorted:ICountryData[]=[];
+  let newOrder:string = order;
   if(order==="ASC") {
     newOrder = "DSC";    
     sorted = [...filteredData].sort((a,b)=>
@@ -32,37 +31,37 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
 }
 
 /*    FILTER     */
-export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
+export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
   console.log(filter);
   
-  var newFilteredData:ICountryData[]=[];
-  if(filter===0) {
-    var smallerThanLt = filteredData.filter((country: { area: number; }) => {
+  let newFilteredData:ICountryData[]=[];
+  if(filter==="area") {
+    const smallerThanLt = filteredData.filter((country: { area: number; }) => {
       return country.area < 65300.0;
     })
     newFilteredData = smallerThanLt;
   }
-  else if(filter===1) {
-    var inOceania = filteredData.filter((country: { region: string; }) => {
+  else if(filter==="region") {
+    const inOceania = filteredData.filter((country: { region: string; }) => {
       return country.region === "Oceania";
     })
     newFilteredData=inOceania;
   }
-  else if(filter===2) {
+  else if(filter==="all") {
     newFilteredData=dataCopy;
     }
   return {newFilteredData}
 }
 
 /*    ACTIVE FILTER    */
-export const handleActiveFilterUI = (filter:number) => {
-  const button:HTMLElement | null = document.getElementById("btn" + filter);
+export const handleActiveFilterUI = (filter:string) => {
+  const button:HTMLElement | null= document.getElementById(filter);
   console.log(button);
-  if(filter!==2) {
+  if(filter!=="all") {
     button?.classList.add('active');
   }
   else {
-    document.getElementById("btn0")?.classList.remove('active');
-    document.getElementById("btn1")?.classList.remove('active');
+    document.getElementById("area")?.classList.remove('active');
+    document.getElementById("region")?.classList.remove('active');
   }
 }

@@ -5,6 +5,8 @@ type Props = {
 }
 
 const Country = ({countries}:Props) => {
+  console.log("current countries:")
+  console.log(countries)
   return (
     <ul className='countries-list'>
       {countries.map((country: ICountryData) => (

@@ -23,5 +23,5 @@ export type ISort = {
 export type IPagination = {
   countriesPerPage: number,
   totalCountries: number,
-  paginate:Function
+  paginate: (pageNumber: number) => void
 }
