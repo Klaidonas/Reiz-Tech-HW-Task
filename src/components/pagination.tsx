@@ -19,7 +19,7 @@ const Pagination = ({ countriesPerPage, totalCountries, paginate, noCurrentCount
     setActive(nr);
   }
   useEffect(() => {
-    if(noCurrentCountries==true) handlePaginate(1)
+    if((noCurrentCountries)) handlePaginate(1)
   }, [noCurrentCountries])
   
   return (

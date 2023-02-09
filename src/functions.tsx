@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ICountryData } from './interfaces';
 
 /*    FETCHING     */
-export const CountriesFetch = async(url:string) => {
+export const Fetch = async(url:string) => {
   let error='';
   let countries:ICountryData[]=[];
   await axios

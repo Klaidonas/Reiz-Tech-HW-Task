@@ -2,21 +2,29 @@ import './styles/style.css';
 import './styles/navigation.css';
 import './styles/countriesList.css';
 import './styles/pagination.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CountryList from './components/CountriesList';
-import { Filter, handleActiveFilterUI, Sort } from './functions';
-import { ICountryData, ISort } from './interfaces';
+import { Fetch, Filter, handleActiveFilterUI, Sort } from './functions';
+import { ICountryData, IDATA, ISort } from './interfaces';
 import Nav from './components/nav';
 
 function App() {
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [order, setOrder] = useState("DSC");
+  const [isDataFetched, setIsDataFetched] = useState<boolean>(false);
 
-  /*  BRINGING DATA(COUNTRIES) FROM CHILD(CountryList)  */
-  const countriesFetch = (countryList:ICountryData[]) => {
-    setDataCopy(countryList);
-    setFilteredData(countryList);
+  useEffect(() => {
+    fetchCountries();
+  }, [])
+
+  /*    fetching data(countries)     */
+  const fetchCountries = async() => {
+    const {countries, error }:IDATA = await Fetch("https://restcountries.com/v2/all?fields=name,region,area");
+    setDataCopy(countries);
+    setFilteredData(countries);
+    if(error) alert(error)
+    setIsDataFetched(true);
   }
   console.log(filteredData);
 
@@ -38,7 +46,7 @@ function App() {
     <div className="content">
       <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
       <Nav handleFilter = {handleFilter} sorting = {sorting}/>
-      <CountryList countriesFetch={countriesFetch} newFilteredData={filteredData}/>
+      <CountryList filteredData={filteredData} isDataFetched = {isDataFetched}/>
     </div>
   );
 }

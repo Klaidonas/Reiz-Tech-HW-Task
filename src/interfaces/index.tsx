@@ -19,4 +19,3 @@ export type ISort = {
   sorted: ICountryData[],
   newOrder: string
 }
-

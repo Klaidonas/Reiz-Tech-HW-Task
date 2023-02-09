@@ -7,13 +7,16 @@ type Props = {
   isDataFetched:boolean
 }
 const Country = ({countries, noCurrentCountries, isDataFetched}:Props) => {
-  console.log("current countries:")
-  console.log(countries)
+  console.log("current countries: " + countries.length)
 
     /*    checking if there are any data(countries) in current page   */
   useEffect(() => {
-    console.log(countries.length);
-    if(countries.length===0 && (isDataFetched)) noCurrentCountries(true)
+    if(countries.length===0 && (isDataFetched)) {
+      noCurrentCountries(true);
+    }
+    else if(countries.length!==0 && (isDataFetched)) {
+      noCurrentCountries(false);
+    }
   }, [countries])
 
   return (
@@ -39,5 +42,4 @@ const Country = ({countries, noCurrentCountries, isDataFetched}:Props) => {
     </ul>
   );
 };
-
 export default Country;
