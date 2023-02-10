@@ -5,11 +5,12 @@ button {
   font-weight: bold;
   font-size: 14px;
   height: 25px;
+  padding:3px 10px;
+  border-radius: 15px;
+  cursor: pointer;
 }
-
 .filters button {
   background-color: #90ff90;
-  border-radius: 15px;
 }
 .sort-btn button {
   background-color: #90ff90;
@@ -21,7 +22,6 @@ button {
 .navigation .filters button{
   margin: 0 10px;
 }
-
 .filters .active {
   border: 1px solid #000;
 }

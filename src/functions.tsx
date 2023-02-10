@@ -1,22 +1,23 @@
 import axios from 'axios';
 import { ICountryData } from './interfaces';
+import { EFilters } from "./Enums";
 
 /*    FETCHING     */
-export const CountriesFetch = async(url:string) => {
-  var error='';
-  var data:ICountryData[]=[];
+export const Fetch = async(url:string) => {
+  let error='';
+  let countries:ICountryData[]=[];
   await axios
   .get(url)
-  .then((response) => {data = response.data;})
+  .then((response) => {countries = response.data;})
   .catch((err) => {error=err})
   .finally(() => {})
-  return {data, error };
+  return {countries, error };
 }
 
  /*    SORTING     */
 export const Sort = async(filteredData:ICountryData[], order:string) => {
-  var sorted:ICountryData[]=[];
-  var newOrder:string = order;
+  let sorted:ICountryData[]=[];
+  let newOrder:string = order;
   if(order==="ASC") {
     newOrder = "DSC";    
     sorted = [...filteredData].sort((a,b)=>
@@ -31,35 +32,22 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
 }
 
 /*    FILTER     */
-export const Filter = (filter: number, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
-  var newFilteredData:ICountryData[]=[];
-  if(filter===0) {
-    var smallerThanLt = filteredData.filter((country: { area: number; }) => {
+export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICountryData[]) => {  
+  let newFilteredData:ICountryData[]=[];
+  if(filter===EFilters.area) {
+    const smallerThanLt = filteredData.filter((country: { area: number; }) => {
       return country.area < 65300.0;
     })
     newFilteredData = smallerThanLt;
   }
-  else if(filter===1) {
-    var inOceania = filteredData.filter((country: { region: string; }) => {
+  else if(filter===EFilters.region) {
+    const inOceania = filteredData.filter((country: { region: string; }) => {
       return country.region === "Oceania";
     })
     newFilteredData=inOceania;
   }
-  else if(filter===2) {
+  else if(filter===EFilters.all) {
     newFilteredData=dataCopy;
     }
   return {newFilteredData}
-}
-
-/*    ACTIVE FILTER    */
-export const handleActiveFilterUI = (filter:number) => {
-  const button:HTMLElement | null = document.getElementById("btn" + filter);
-  console.log(button);
-  if(filter!==2) {
-    button?.classList.add('active');
-  }
-  else {
-    document.getElementById("btn0")?.classList.remove('active');
-    document.getElementById("btn1")?.classList.remove('active');
-  }
 }

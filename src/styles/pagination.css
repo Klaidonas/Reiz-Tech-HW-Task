@@ -14,12 +14,10 @@
   text-decoration: none;
   color: #000;
 }
-
 .pagination .active {
   font-weight: bold;
   border-bottom: 1px solid #000;
 }
-
 @media (max-width: 1235px) {
   .pagination li {
     padding: 3px;

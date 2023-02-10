@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { IPagination } from '../interfaces';
+import { useEffect, useState } from 'react';
 
-  
-
-const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination) => {
+type Props = {
+  countriesPerPage: number,
+  totalCountries: number,
+  paginate: (pageNumber: number) => void,
+  noCurrentCountries: boolean
+}
+const Pagination = ({ countriesPerPage, totalCountries, paginate, noCurrentCountries }: Props) => {
   const [active, setActive] = useState<number>(1);
   
   const pageNumbers = [];
@@ -11,11 +14,14 @@ const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination)
     pageNumbers.push(i);
   }
 
-  const handlePaginate = (nr:number): void => {
+  const handlePaginate = (nr:number) => {
     paginate(nr);
     setActive(nr);
   }
-
+  useEffect(() => {
+    if((noCurrentCountries)) handlePaginate(1)
+  }, [noCurrentCountries])
+  
   return (
     <div className='pagination'>
       <ul>
@@ -30,5 +36,4 @@ const Pagination = ({ countriesPerPage, totalCountries, paginate }: IPagination)
     </div>
   );
 };
-
 export default Pagination;

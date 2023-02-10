@@ -1,3 +1,8 @@
+.loading {
+  margin: 80px auto auto 45px;
+  font-size: 35px;
+  font-weight: bold;
+}
 .countries-list {
   margin:0;
   padding: 0;
@@ -7,6 +12,7 @@
  margin: 20px 0;
  background-color: #ccffcc;
  list-style: none;
+ border-radius: 15px;
 }
 .countries-list h4{
   margin: 10px 0;
@@ -23,7 +29,6 @@
 .data {
   font-weight: bold;
 }
-
 
 @media (max-width: 1240px) {
   .li-container {
