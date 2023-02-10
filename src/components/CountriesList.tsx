@@ -4,10 +4,9 @@ import { ICountryData } from '../interfaces';
 import Pagination from './pagination';
 
 type Props = {
-  filteredData:ICountryData[],
-  isDataFetched: boolean
+  filteredData:ICountryData[]
 }
-const CountryList = ({ filteredData, isDataFetched}:Props) => {
+const CountryList = ({ filteredData }:Props) => {
   /*    PAGINATION   */
   const [currentPage, setCurrentPage] = useState(1);
   const countriesPerPage:number = 8;
@@ -32,8 +31,7 @@ const CountryList = ({ filteredData, isDataFetched}:Props) => {
   return (
     <div>
       <Country countries={currentCountries} 
-        noCurrentCountries = {isThereCurrentCountries} 
-        isDataFetched = {isDataFetched}/>
+        noCurrentCountries = {isThereCurrentCountries}/>
       <Pagination countriesPerPage={countriesPerPage} 
         totalCountries={filteredData.length} 
         paginate={paginate}

@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { EFilters } from "../Enums";
-import { ICountryData } from "../interfaces";
 
 type Props = {
   handleFilter: (filter:string) => void,
   sorting: () => void
 }
 const Nav = ({handleFilter, sorting}:Props) => {
+  const [active, setActive] = useState<string[]>([EFilters.all])
 
-  const [active, setActive] = useState<string>(EFilters.all)
+
+  const filters = [EFilters.area, EFilters.region, EFilters.all]
+
   const handleClick = (filter:string) => {
     handleFilter(filter);
-    setActive(filter);
+    if(filter === EFilters.all) {
+      setActive([EFilters.all]);
+    } 
+    else if(active.includes(EFilters.all)) {
+      setActive([filter]);
+    } 
+    else if(!active.includes(filter) && active.length < 2) {
+      setActive([...active, filter]);
+    }
   }
-  const filters = [EFilters.area, EFilters.region, EFilters.all]
   
   return (
     <div className="navigation"> 
       <div className="filters">
       {filters.map((filter, i) =>
-          <button key={i} className={active === filter ? "active" : undefined} onClick={() => handleClick(filter)}>{filter}</button>
+          <button key={i} className={active.includes(filter) ? "active" : undefined} onClick={() => handleClick(filter)}>{filter}</button>
         )}
       </div>
       <div className="sort-btn">

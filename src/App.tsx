@@ -12,7 +12,6 @@ function App() {
   const [dataCopy, setDataCopy] = useState<ICountryData[]>([]);
   const [filteredData, setFilteredData] = useState<ICountryData[]>([]);
   const [order, setOrder] = useState("DSC");
-  const [isDataFetched, setIsDataFetched] = useState<boolean>(false);
 
   useEffect(() => {
     fetchCountries();
@@ -24,7 +23,6 @@ function App() {
     setDataCopy(countries);
     setFilteredData(countries);
     if(error) alert(error)
-    setIsDataFetched(true);
     console.log("data fetched(fetchCountries)")
     console.log(countries);
   }
@@ -49,7 +47,7 @@ function App() {
       <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
       <Nav handleFilter = {handleFilter} sorting = {sorting} />
       {filteredData.length ?
-        <CountryList filteredData={filteredData} isDataFetched = {isDataFetched}/>
+        <CountryList filteredData={filteredData} />
         :
         <div className='loading'>Loading data</div>
         }
