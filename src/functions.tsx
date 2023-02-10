@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useRef } from 'react';
 import { ICountryData } from './interfaces';
+import { EFilters } from "./Enums";
 
 /*    FETCHING     */
 export const Fetch = async(url:string) => {
@@ -36,21 +36,20 @@ export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICo
   console.log(filter);
   
   let newFilteredData:ICountryData[]=[];
-  if(filter==="area") {
+  if(filter===EFilters.area) {
     const smallerThanLt = filteredData.filter((country: { area: number; }) => {
       return country.area < 65300.0;
     })
     newFilteredData = smallerThanLt;
   }
-  else if(filter==="region") {
+  else if(filter===EFilters.region) {
     const inOceania = filteredData.filter((country: { region: string; }) => {
       return country.region === "Oceania";
     })
     newFilteredData=inOceania;
   }
-  else if(filter==="all") {
+  else if(filter===EFilters.all) {
     newFilteredData=dataCopy;
     }
   return {newFilteredData}
 }
-

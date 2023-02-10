@@ -11,18 +11,14 @@ const Country = ({countries, noCurrentCountries, isDataFetched}:Props) => {
 
     /*    checking if there are any data(countries) in current page   */
   useEffect(() => {
-    if(countries.length===0 && (isDataFetched)) {
-      noCurrentCountries(true);
-    }
-    else if(countries.length!==0 && (isDataFetched)) {
-      noCurrentCountries(false);
-    }
+    if(countries.length === 0 && (isDataFetched))  noCurrentCountries(true);
+    else if(countries.length !== 0 && (isDataFetched)) noCurrentCountries(false);
   }, [countries])
 
   return (
     <ul className='countries-list'>
-      {countries.map((country: ICountryData) => (
-        <li className='country-element' key={Math.random()}>
+      {countries.map((country, i) => (
+        <li className='country-element' key={i}>
           <div className="li-container">
             <div className='li-column'>
               <p>Country name:</p>

@@ -31,16 +31,13 @@ const CountryList = ({ filteredData, isDataFetched}:Props) => {
 
   console.log("current countries in countrieslist")
   console.log(currentCountries)
-  if(!filteredData.length) return <div className='loading'>Loading data</div>
 
   return (
     <div>
-      <Country 
-        countries={currentCountries} 
+      <Country countries={currentCountries} 
         noCurrentCountries = {isThereCurrentCountries} 
         isDataFetched = {isDataFetched}/>
-      <Pagination 
-        countriesPerPage={countriesPerPage} 
+      <Pagination countriesPerPage={countriesPerPage} 
         totalCountries={filteredData.length} 
         paginate={paginate}
         noCurrentCountries = {noCurrentCountries}/>

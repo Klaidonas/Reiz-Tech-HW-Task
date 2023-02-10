@@ -44,8 +44,12 @@ function App() {
   return (
     <div className="content">
       <h1>{filteredData ? "Reiz Tech Task" : "data error"}</h1>
-      <Nav handleFilter = {handleFilter} sorting = {sorting}/>
-      <CountryList filteredData={filteredData} isDataFetched = {isDataFetched}/>
+      <Nav handleFilter = {handleFilter} sorting = {sorting} />
+      {filteredData.length ?
+        <CountryList filteredData={filteredData} isDataFetched = {isDataFetched}/>
+        :
+        <div className='loading'>Loading data</div>
+        }
     </div>
   );
 }
