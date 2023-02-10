@@ -12,8 +12,6 @@ const Nav = ({handleFilter, sorting}:Props) => {
   const handleClick = (filter:string) => {
     handleFilter(filter);
     setActive(filter);
-    console.log(filter);
-    console.log(Date.now())
   }
   const filters = [EFilters.area, EFilters.region, EFilters.all]
   

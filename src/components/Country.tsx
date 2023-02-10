@@ -7,7 +7,8 @@ type Props = {
   isDataFetched:boolean
 }
 const Country = ({countries, noCurrentCountries, isDataFetched}:Props) => {
-  console.log("current countries: " + countries.length)
+  console.log("current countries length: " + countries.length + "; current countries: ")
+  console.log(countries)
 
     /*    checking if there are any data(countries) in current page   */
   useEffect(() => {

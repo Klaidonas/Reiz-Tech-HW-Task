@@ -17,7 +17,7 @@ const CountryList = ({ filteredData, isDataFetched}:Props) => {
 
   const [noCurrentCountries, setNoCurrentCountries] = useState<boolean>(false);
 
-  /*    changing current page(pageNumber brought from Pagination)   */
+  /*    changing current page(pageNumber brought from <Pagination />)   */
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     console.log("page number:" + pageNumber);
@@ -26,11 +26,8 @@ const CountryList = ({ filteredData, isDataFetched}:Props) => {
   /*changing current page to the first one if there are no countries in current page*/
   const isThereCurrentCountries = (noCurrentCountries:boolean) => {
     setNoCurrentCountries(noCurrentCountries)
-    console.log("noCurrentCountries:" + noCurrentCountries)
+    if(noCurrentCountries)console.log("noCurrentCountries: " + noCurrentCountries)
   }
-
-  console.log("current countries in countrieslist")
-  console.log(currentCountries)
 
   return (
     <div>

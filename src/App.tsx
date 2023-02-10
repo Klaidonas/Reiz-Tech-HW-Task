@@ -25,13 +25,15 @@ function App() {
     setFilteredData(countries);
     if(error) alert(error)
     setIsDataFetched(true);
+    console.log("data fetched(fetchCountries)")
+    console.log(countries);
   }
-  console.log(filteredData);
 
   /*    FILTER     */
   const handleFilter = async(filter:string) => {
     const {newFilteredData} = Filter(filter, filteredData as ICountryData[], dataCopy as ICountryData[]);
-    setFilteredData(newFilteredData)
+    setFilteredData(newFilteredData);
+    console.log("filter: " + filter);
   }
 
   /*    SORTING     */
@@ -39,6 +41,7 @@ function App() {
     const { sorted, newOrder }:ISort = await Sort(filteredData as ICountryData[], order);
     setFilteredData(sorted);
     setOrder(newOrder);
+    console.log("sort order: " + order);
   }
 
   return (

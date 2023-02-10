@@ -32,9 +32,7 @@ export const Sort = async(filteredData:ICountryData[], order:string) => {
 }
 
 /*    FILTER     */
-export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICountryData[]) => {
-  console.log(filter);
-  
+export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICountryData[]) => {  
   let newFilteredData:ICountryData[]=[];
   if(filter===EFilters.area) {
     const smallerThanLt = filteredData.filter((country: { area: number; }) => {
