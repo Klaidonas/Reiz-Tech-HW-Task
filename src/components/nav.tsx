@@ -12,7 +12,7 @@ const Nav = ({handleFilter, sorting}:Props) => {
 
   const handleClick = (filter:string) => {
     handleFilter(filter);
-    
+
     if(filter === EFilters.all) {
       setActive([EFilters.all]);
     } 
