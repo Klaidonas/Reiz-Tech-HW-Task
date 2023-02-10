@@ -8,11 +8,11 @@ type Props = {
 const Nav = ({handleFilter, sorting}:Props) => {
   const [active, setActive] = useState<string[]>([EFilters.all])
 
-
   const filters = [EFilters.area, EFilters.region, EFilters.all]
 
   const handleClick = (filter:string) => {
     handleFilter(filter);
+    
     if(filter === EFilters.all) {
       setActive([EFilters.all]);
     } 
