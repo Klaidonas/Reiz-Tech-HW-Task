@@ -35,10 +35,14 @@ const CountryList = ({ filteredData, isDataFetched}:Props) => {
 
   return (
     <div>
-      <Country countries={currentCountries} 
-      noCurrentCountries = {isThereCurrentCountries} isDataFetched = {isDataFetched}/>
-      <Pagination countriesPerPage={countriesPerPage} 
-        totalCountries={filteredData.length} paginate={paginate}
+      <Country 
+        countries={currentCountries} 
+        noCurrentCountries = {isThereCurrentCountries} 
+        isDataFetched = {isDataFetched}/>
+      <Pagination 
+        countriesPerPage={countriesPerPage} 
+        totalCountries={filteredData.length} 
+        paginate={paginate}
         noCurrentCountries = {noCurrentCountries}/>
     </div>
   );

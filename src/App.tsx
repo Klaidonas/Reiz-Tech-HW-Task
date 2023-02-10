@@ -4,7 +4,7 @@ import './styles/countriesList.css';
 import './styles/pagination.css';
 import { useEffect, useState } from 'react';
 import CountryList from './components/CountriesList';
-import { Fetch, Filter, handleActiveFilterUI, Sort } from './functions';
+import { Fetch, Filter, Sort } from './functions';
 import { ICountryData, IDATA, ISort } from './interfaces';
 import Nav from './components/nav';
 
@@ -32,7 +32,6 @@ function App() {
   const handleFilter = async(filter:string) => {
     const {newFilteredData} = Filter(filter, filteredData as ICountryData[], dataCopy as ICountryData[]);
     setFilteredData(newFilteredData)
-    handleActiveFilterUI(filter);
   }
 
   /*    SORTING     */

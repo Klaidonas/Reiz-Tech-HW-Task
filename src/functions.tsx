@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useRef } from 'react';
 import { ICountryData } from './interfaces';
 
 /*    FETCHING     */
@@ -53,15 +54,3 @@ export const Filter = (filter: string, filteredData:ICountryData[], dataCopy:ICo
   return {newFilteredData}
 }
 
-/*    ACTIVE FILTER    */
-export const handleActiveFilterUI = (filter:string) => {
-  const button:HTMLElement | null= document.getElementById(filter);
-  console.log(button);
-  if(filter!=="all") {
-    button?.classList.add('active');
-  }
-  else {
-    document.getElementById("area")?.classList.remove('active');
-    document.getElementById("region")?.classList.remove('active');
-  }
-}
