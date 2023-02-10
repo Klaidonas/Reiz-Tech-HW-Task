@@ -13,15 +13,15 @@ const Nav = ({handleFilter, sorting}:Props) => {
   const handleClick = (filter:string) => {
     handleFilter(filter);
 
-    // if(filter === EFilters.all) {
-    //   setActive([EFilters.all]);
-    // } 
-    // else if(active.includes(EFilters.all)) {
-    //   setActive([filter]);
-    // } 
-    // else if(!active.includes(filter) && active.length < 2) {
-    //   setActive([...active, filter]);
-    // }
+    if(filter === EFilters.all) {
+      setActive([EFilters.all]);
+    } 
+    else if(active.includes(EFilters.all)) {
+      setActive([filter]);
+    } 
+    else if(!active.includes(filter) && active.length < 2) {
+      setActive([...active, filter]);
+    }
   }
   
   return (
